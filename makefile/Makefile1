@@ -1,0 +1,23 @@
+tst_makefile1: main.o log.o
+	g++ main.o log.o -o tst_makefile1
+	echo $@
+	echo $%
+	echo $<
+	echo $?
+	echo $^
+
+main.o: main.cpp
+	g++ -c main.cpp
+	echo $@
+	echo $%
+	echo $<
+	echo $?
+	echo $^
+
+log.o: log.cpp
+	g++ -c log.cpp
+	echo $@
+	echo $%
+	echo $<
+	echo $?
+	echo $^

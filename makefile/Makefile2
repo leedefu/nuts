@@ -1,0 +1,8 @@
+tst_makefile2: main.o log.o
+	g++ $^ -o $@
+
+main.o: main.cpp
+	g++ -c $< 
+
+log.o: log.cpp
+	g++ -c $< 

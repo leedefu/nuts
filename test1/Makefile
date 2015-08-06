@@ -9,7 +9,7 @@ INCLUDE =
 
 all:test
 
-test: virtual_inherit.o
+test: test1.o
 	$(CPP) $(LIB) $(INCLUDE) $^ -o $@
 
 .c.o:

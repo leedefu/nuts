@@ -32,6 +32,20 @@ class b1 : public virtual a1
 int main(int argc, char* argv[])
 {
 
+    int32_t x = 90;
+    float f = (float)x / 100;
+    printf("f=%f\n", f);
+    if (f == 0.900000) {
+        printf("f=0.900000\n");
+    }
+    int32_t y = f * 100;
+    printf("y=%d\n", y);
+    if (y == 90) {
+        printf("y=90\n");
+    }
+
+
+
 #if 0
     printf("sizeof(a1) = %d \n", sizeof(a1));
     // result 1
@@ -39,7 +53,6 @@ int main(int argc, char* argv[])
 
     printf("sizeof(b1) = %d \n", sizeof(b1));
     // result 8
-#endif
     
     // buffer
     unsigned char data[12] = { 0 };
@@ -81,7 +94,6 @@ int main(int argc, char* argv[])
         printf("------read--------------------\n\n");
     }
 
-
-
+#endif
     return 0;
 }
