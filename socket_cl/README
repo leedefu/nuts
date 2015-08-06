@@ -1,0 +1,6 @@
+server run: ./socket_se 5000(random port > 1024)
+client run: ./socket_cl localhost 5000(random port > 1024)
+            ./socket_cl 127.0.0.1 5000(random port > 1024)
+
+            hostname: localhost
+            hostname: 127.0.0.1
