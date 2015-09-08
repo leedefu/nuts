@@ -32,6 +32,32 @@ class b1 : public virtual a1
 int main(int argc, char* argv[])
 {
 
+    std::string str1 = "2015-09-25-11-59-02";
+    std::string str2 = "2015-08-25-12-59-02";
+    if (str1.compare(str2) < 0) {
+        printf("%s.compare(%s) < 0\n", str1.c_str(), str2.c_str());
+    }
+    else if (str1.compare(str2) > 0) {
+        printf("%s.compare(%s) > 0\n", str1.c_str(), str2.c_str());
+    }
+    else {
+        printf("%s.compare(%s) = 0\n", str1.c_str(), str2.c_str());
+    }
+
+    if (str1 < str2) {
+        printf("%s < %s \n", str1.c_str(), str2.c_str());
+    }
+    else if (str1 > str2) {
+        printf("%s > %s \n", str1.c_str(), str2.c_str());
+    }
+    else {
+        printf("%s = %s \n", str1.c_str(), str2.c_str());
+    }
+#if 0
+    float ff = 1.0;
+    printf("ff=%f.\n", ff);
+#endif
+
 #if 0
     printf("sizeof(a1) = %d \n", sizeof(a1));
     // result 1
