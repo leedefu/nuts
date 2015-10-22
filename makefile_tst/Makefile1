@@ -8,7 +8,7 @@ tst_makefile1: main.o log.o
 
 main.o: main.cpp
 	g++ -c main.cpp
-	echo $@
+	echo "\$\@:"$@
 	echo $%
 	echo $<
 	echo $?

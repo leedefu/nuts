@@ -28,8 +28,8 @@ public:
 
 public:
     virtual void run();
-    void transferTime(SYSTEMTIME* sys_time, char* buff);
-    void doInternetTime(int& client_socket);
+    void parse(SYSTEMTIME* sys_time, char* buff);
+    void syncFromInternet(int& client_socket);
 
 private:
     int m_socket;

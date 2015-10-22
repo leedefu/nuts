@@ -13,11 +13,11 @@ namespace l_nut_thread {
 class l_nut_log {
 
 public:
-    static void print(char* format, ...)
+    static void print(const char* format, ...)
     {
         // TODO: research below:
         // printf("[l_nut_thread pid=%d, tid=%d]:", getpid(), syscall(SYS_gettid));
-        printf("[l_nut_thread pid=%d, tid=%d]: ", getpid(), syscall(__NR_gettid));
+        printf("[l_nut_thread pid=%d, tid=%ld]: ", getpid(), syscall(__NR_gettid));
         va_list args;
         va_start(args, format);
         vprintf(format, args);

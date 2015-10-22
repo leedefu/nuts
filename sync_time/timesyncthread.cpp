@@ -41,11 +41,11 @@ namespace l_nut_thread {
             l_nut_log::print("timesyncthread run to sleep.");
             sleep(10);
             l_nut_log::print("timesyncthread run awaked.");
-            doInternetTime(m_socket);
+            syncFromInternet(m_socket);
         }
     }
 
-    void timesyncthread::transferTime(SYSTEMTIME* sys_time, char* buff)
+    void timesyncthread::parse(SYSTEMTIME* sys_time, char* buff)
     {
         if (NULL == sys_time || NULL == buff) {
             return;
@@ -79,7 +79,7 @@ namespace l_nut_thread {
         sys_time->wSecond = atoi(str);
     }
 
-    void timesyncthread::doInternetTime(int& client_socket)
+    void timesyncthread::syncFromInternet(int& client_socket)
     {
         l_nut_log::print("Internet Time Server IP=[%s], Port=[%d]", INTERNET_TIME_SERVER_IP, INTERNET_TIME_SERVER_PORT);
 
@@ -139,7 +139,7 @@ namespace l_nut_thread {
 
         SYSTEMTIME sys_time;
         memset(&sys_time,0,sizeof(SYSTEMTIME));
-        transferTime(&sys_time, buffer);
+        parse(&sys_time, buffer);
 
         l_nut_log::print("timesyncthread Receive time : %s",buffer);
         l_nut_log::print("timesyncthread Receive time wYear: %d",sys_time.wYear);

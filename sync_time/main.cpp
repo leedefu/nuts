@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
     l_nut_log::print("enter loop");
     while (1) {
         l_nut_log::print("main to sleep.");
-        sleep(1);
-        l_nut_log::print("run awaked.");
+        sleep(5);
+        // l_nut_log::print("run awaked.");
     }
 
     return 0;
