@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 
     l_nut_log::print("main thread enter loop......");
     while (1) {
+        l_nut_log::print("main thread do something in main function.");
         l_nut_log::print("main thread will sleep in main function.");
         sleep(3);
         l_nut_log::print("main thread awaked in function :main.");

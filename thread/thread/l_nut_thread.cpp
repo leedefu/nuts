@@ -79,6 +79,7 @@ void l_thread::run()
 {
     l_nut_log::print("new thread run......");
     while (1) {
+        l_nut_log::print("new thread do something in run function.");
         l_nut_log::print("new thread will sleep in run function.");
         sleep(10);
         l_nut_log::print("new thread awaked in run function.");
@@ -89,6 +90,7 @@ void* l_thread::thread_routine(void* args)
 {
     l_nut_log::print("thread_routine.");
     static_cast<l_thread*>(args)->run();
+    return NULL;
 }
  
 }
