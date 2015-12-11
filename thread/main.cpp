@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "thread/l_nut_thread.h"
 #include <l_nut_log.h>
 
