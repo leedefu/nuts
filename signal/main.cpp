@@ -7,8 +7,7 @@
 static void signal_handler(int sig)
 {
     printf("starting signal_handler\n");
-    printf("you just have inputed CTRL+C, exit process......\n");
-    exit(0);
+    printf("Type CTRL+C\n");
 }
 
 int main(int argc, char* argv[])
