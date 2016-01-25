@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,6 +32,12 @@ class b1 : public virtual a1
 
 int main(int argc, char* argv[])
 {
+    printf("::atoi(\"-1\")=%d\n", atoi("-1"));
+
+#if 0
+    errno = ENOENT;
+    printf("%s\n", strerror(errno));
+
 
     int32_t x = 90;
     float f = (float)x / 100;
@@ -46,7 +53,6 @@ int main(int argc, char* argv[])
 
 
 
-#if 0
     printf("sizeof(a1) = %d \n", sizeof(a1));
     // result 1
 
