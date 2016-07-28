@@ -4,13 +4,13 @@ CC = gcc
 CFLAGS = -std=c++0x -c -Wall -g
 CPPFLAGS = -std=c++0x -c -Wall -g 
 
-LIB =
+LIB = -lpthread
 INCLUDE =
 
 all:test
 
-test: test1.o
-	$(CPP) $(LIB) $(INCLUDE) $^ -o $@
+test: test.o
+	$(CPP) $(INCLUDE) $^ -o $@ $(LIB) 
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $<
