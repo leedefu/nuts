@@ -16,7 +16,8 @@
 namespace l_nut_thread {
 
 #define BUFFER_SIZE 1024
-    static char INTERNET_TIME_SERVER_IP[64] = "66.219.116.140";
+    // static char INTERNET_TIME_SERVER_IP[64] = "66.219.116.140";
+    static char INTERNET_TIME_SERVER_IP[64] = "129.6.15.29";
     static int INTERNET_TIME_SERVER_PORT = 13;
 
     timesyncthread::timesyncthread()

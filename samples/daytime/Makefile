@@ -1,7 +1,7 @@
 LIB = -lcrypto -lpthread
 INCLUDE = ./ 
 
-synctime: main.o l_nut_thread.o timesyncthread.o
+daytime_protocol_tool: main.o l_nut_thread.o timesyncthread.o
 	g++ $^ $(LIB) -I $(INCLUDE) -o $@ 
 
 main.o: main.cpp
@@ -15,4 +15,4 @@ timesyncthread.o: timesyncthread.cpp
 
 .PHONY: clean
 clean:
-	rm -rf synctime *.o
+	rm -rf daytime_protocol_tool *.o

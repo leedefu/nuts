@@ -1,1 +1,1 @@
-add some test project code.
+* add daytime protocol sample code (samples/daytime)   
