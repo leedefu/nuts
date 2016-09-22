@@ -4,6 +4,21 @@
 
 int main(int argc, char* argv[])
 {
+    {
+        int a = 0x87654321;
+        char *p = (char *)&a;
+        {
+            char str[20] = { 0 };
+            sprintf(str,"%d.%d.%d.%d\n", p[0], p[1], p[2], p[3]);
+            printf(str);
+        }
+
+        {
+            char str[20] = { 0 };
+            sprintf(str,"0x%x.0x%x.0x%x.0x%x\n", p[0], p[1], p[2], p[3]);
+            printf(str);
+        }
+    }
     // method 1
     /* using union to check endian */
     /***********************************************************/
