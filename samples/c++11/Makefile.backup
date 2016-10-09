@@ -1,0 +1,25 @@
+CC=gcc
+CXX=g++
+
+#OPT ?= -O2 -g2
+OPT ?= -g -Wall --verbose
+#OPT ?= -g2
+
+CFLAGS += -I. -I./inlcude -std=c++0x -pthread $(OPT) 
+CXXFLAGS = -I. -I./include -std=c++0x -pthread $(OPT)
+
+LDFLAGS += -pthread -L./lib
+
+LIBS += -lpthread
+
+INCLUDE =-I. -I./include
+
+cpp11 : main.o
+	$(CXX) $(LDFLAGS) $(LIBS) $^ -o $@ 
+
+main.o: main.cpp
+	$(CXX) -I $(INCLUDE) $(CXXFLAGS) -c $<
+
+.PHONY: clean
+clean:
+	rm -rf cpp11 *.o

@@ -1,14 +1,28 @@
-LIB = 
-INCLUDE =
-CPPFLAGS = -std=c++0x -Wall -g --verbose
-CC=g++
+CC=gcc
+CXX=g++
 
-cpp11 : main.o
-	$(CC) $(CPPFLAGS) $^ $(LIB) -o $@ 
+#OPT ?= -O2 -g2
+OPT ?= -g -Wall --verbose
+#OPT ?= -g2
 
-main.o: main.cpp
-	$(CC) $(CPPFLAGS) -c $<
+CFLAGS =  -std=c++0x -pthread $(OPT) 
+CXXFLAGS = -std=c++0x -pthread $(OPT)
+
+LDFLAGS = -pthread -L./lib -L./
+
+LIBS = -lpthread
+
+INCLUDE =-I. -I./include -I./samples -I./src/common
+
+include ./samples/Makefile
+include ./src/Makefile
+
+#.cpp.o:
+#	$(CXX) -I $(INCLUDE) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	rm -rf cpp11 *.o
+	find . -name *.o -exec rm {} \;	
+	find . -name *.so -exec rm {} \;	
+	find . -name *.a -exec rm {} \;	
+	find . -name somenuts -exec rm {} \;	
