@@ -1,4 +1,9 @@
 #include <stdio.h>
+#include <stddef.h>
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include <algorithm>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,9 +18,22 @@
 #include <stdint.h>
 #include <bits/wordsize.h>
 #include <string>
+#include <map>
 #include <iostream>
 
 using namespace std;
+
+#define VERSION_HEADER  "Manifest-Version"
+#define CREATOR_HEADER  "Created-By"
+#define NAME_HEADER  "Name"
+#define DIGEST_HEADER  "SHA1-Digest"
+#define VERSION  "1.0"
+#define CREATOR  "NGI-Platform"
+#define MANIFEST_PATH_NAME  "MANIFEST"
+#define MANIFEST_FILE_NAME  "MANIFEST.MF"
+#define SIGNATURE_FILE_NAME  "MANIFEST.SF"
+#define PUBKEY_FILE_NAME  "MANIFEST.RSA"
+
 
 /*------------------------------------------*/
 class a1
@@ -29,8 +47,215 @@ class b1 : public virtual a1
 };
 /*------------------------------------------*/
 
+#define READ_FROM_FILE 0 
+
+struct A {
+    int a;
+    int b;
+};
+
 int main(int argc, char* argv[])
 {
+    int c = 100;
+    A * p = (A*)(((char*)&c) - offsetof(A, b));
+    printf("p->b=[%d]\n", p->b);
+    printf("&p->b=[%p]\n", &p->b);
+    printf("&p->b=[0x%llx]\n", &p->b);
+
+    // printf("((A*)0)->b =[%d]\n", ((A*)0)->b);
+    printf("&(((A*)0)->b) =[%p]\n", &(((A*)0)->b));
+
+
+return 0;
+
+    char cc = 0xff;
+    unsigned char ucc = (unsigned char)cc;
+    int abc = (int)ucc;
+    printf("abc=%d\n", abc);
+
+    int iii = 0;
+    memcpy(&iii, &cc, 1);
+
+    int ii = static_cast<int>(cc);
+    unsigned int uii = (unsigned int)cc;
+
+    printf("cc=%d\n", cc);
+    printf("ii=%d\n", ii);
+    printf("uii=%d\n", uii);
+    printf("iii=%d\n", iii);
+    printf("0xff=%d\n", 0xff);
+
+// Here return.......................................................
+return 0;
+    int len = strlen(argv[0]);
+    printf("strlen(argv[0]):%d\n", strlen(argv[0]));
+    memset(argv[0], 0, len);
+    memcpy(argv[0], "abc", 3);
+    sleep(3);
+    printf("pid:%d\n", getpid());
+
+
+// Here return.......................................................
+return 0;
+
+    char* array[] = {"213", "456", "789"};
+    int size = sizeof(array);
+
+    printf("array size=%d\n", size);
+    printf("sizeof char*=%d\n", sizeof(char*));
+
+
+#if READ_FROM_FILE
+    ifstream fin("MANIFEST.MF");
+    if (!fin) {
+        printf("error open file\n");
+        return 1;
+    }
+#else
+
+    FILE* fp = fopen("MANIFEST.MF", "rb");
+    fseek(fp, 0, SEEK_END);
+    int iContentSize = ftell(fp);
+    printf("MANIFES.MF size=%d\n", iContentSize);
+
+    rewind(fp);
+    char* pContent = new char[iContentSize];
+    fread(pContent, iContentSize, 1, fp);
+
+    std::istringstream fin;
+    fin.rdbuf()->pubsetbuf(pContent, iContentSize);
+
+#endif
+
+    std::map<std::string, std::string> m_digestMap;
+
+    string buffer;
+    string header;
+    string content;
+    string dHeader;
+    string dContent;
+
+    while (getline(fin, buffer)) {
+        if (buffer == "" || buffer == "\r") {
+            continue;
+        }
+        if (std::string::npos == buffer.find(':')) {
+            cout << "manifest syntax error 1" << endl;
+            return 1;
+        }
+        if (buffer.find(':') != buffer.rfind(':')) {
+            cout << "manifest syntax error 2" << endl;
+            return 1;
+        }
+        if (buffer[buffer.length() - 1] == '\r') {
+            buffer = buffer.substr(0, buffer.length() - 1);
+        }
+        header = buffer.substr(0, buffer.find(':'));
+        content = buffer.substr(buffer.find(':') + 2);
+        if ((header.length() == 0) || content.length() == 0) {
+            cout << "manifest syntax error 3" << endl;
+            return 1;
+        }
+        //cout << header << "\t" << content << endl;
+        if (header == VERSION_HEADER) {
+            continue;
+        }
+        else if (header == CREATOR_HEADER) {
+            continue;
+        }
+        else if (header == NAME_HEADER) {
+            //NCLOGD("[Digest Scan] : %s\n", content.c_str());
+            if (!getline(fin, buffer)) {
+                cout << "manifest syntax error 2" << endl;
+                return 1;
+            }
+            if (buffer == "" || buffer == "\r") {
+                continue;
+            }
+            if (std::string::npos == buffer.find(':')) {
+                cout << "manifest syntax error 1" << endl;
+                return 1;
+            }
+            if (buffer.find(':') != buffer.rfind(':')) {
+                cout << "manifest syntax error 2" << endl;
+                return 1;
+            }
+            if (buffer[buffer.length() - 1] == '\r') {
+                buffer = buffer.substr(0, buffer.length() - 1);
+            }
+            dHeader = buffer.substr(0, buffer.find(':'));
+            dContent = buffer.substr(buffer.find(':') + 2);
+            if ((header.length() == 0) || content.length() == 0) {
+                cout << "manifest syntax error 3" << endl;
+                return 1;
+            }
+            //cout << "\t" << dHeader << "\t" << dContent << endl;
+            if (dHeader == DIGEST_HEADER) {
+                m_digestMap.insert(
+                        map<string, string>::value_type(content, dContent));
+            }
+            else {
+                cout << "manifest syntax error 3" << endl;
+                return 1;
+            }
+        }
+        else {
+            cout << "manifest syntax error 4" << endl;
+            return 1;
+        }
+    }
+
+#if READ_FROM_FILE
+    fin.close();
+#endif
+
+    cout <<"DigestMap size: "<< m_digestMap.size()<<endl;
+    m_digestMap.size();
+
+    if (m_digestMap.size() != 0) {
+        for (map<string, string>::iterator mit = m_digestMap.begin(); mit != m_digestMap.end(); ++mit) {
+            cout<<"[key  ] : "<< mit->first <<endl;
+            cout<<"[value] : "<< mit->second<<endl<<endl;
+        }
+    }
+
+    return 0;
+
+#if 0
+    /*Test for std::string substr*/
+    std::string strHardkey("nutshell.hardkey_back");
+    //strHardkey = strHardkey.substr(0, 20);
+    //printf("strHardkey.substr(0,20) = (%s) \n", strHardkey.c_str());
+
+    std::string hardkey_str = strHardkey;
+    std::transform(hardkey_str.begin(), hardkey_str.end(),
+            hardkey_str.begin(), ::tolower);
+
+    printf("tolower hardkey_str = (%s) \n", hardkey_str.c_str());
+
+    //const std::string::value_type trim_chars[] = { ' ' }; // wrong
+    const std::string::value_type trim_chars[] = " ";  // right
+    const std::string::size_type first_good_char = hardkey_str.find_first_not_of(trim_chars);
+    printf("trim_chars = [%c]\n", trim_chars[0]);
+    printf("first_good_char = %lu\n", first_good_char);
+    const std::string::size_type last_good_char = hardkey_str.find_last_not_of(trim_chars);
+    printf("last_good_char = %lu\n", last_good_char);
+    printf("last_good_char  - first_good_char + 1 = %lu\n", last_good_char - first_good_char + 1);
+    hardkey_str = hardkey_str.substr(first_good_char, last_good_char - first_good_char + 1);
+    //std::string temphardkey_str = hardkey_str.substr(first_good_char, last_good_char - first_good_char + 1);
+    // printf("temphardkey_str = (%s) \n", temphardkey_str.c_str());
+    //hardkey_str = temphardkey_str;
+    printf("hardkey_str = (%s) \n", hardkey_str.c_str());
+    if (hardkey_str == "nutshell.hardkey_back") {
+        printf("same....\n");
+    }
+    else {
+        printf("Different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1!!!!!\n");
+    }
+
+    return 0;
+#endif
+
 
     std::string str1 = "2015-09-25-11-59-02";
     std::string str2 = "2015-08-25-12-59-02";
