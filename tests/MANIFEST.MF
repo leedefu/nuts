@@ -1,0 +1,90 @@
+Manifest-Version: 1.0
+Created-By: 1.0 (Copyright @ 2012 - 2013 Suntec Software(Shanghai) Co., Ltd.)
+
+Name: Manifest.xml
+SHA1-Digest: u9nYYSYnQuQ29VTgbadk6GpDtkY=
+
+Name: app/app.so
+SHA1-Digest: 2nypOvwOXN4QCz0TWq7GO71VAVU=
+
+Name: res/themes.8.zip
+SHA1-Digest: 5YvwbmCZF+8baCZ+cqBwbTUzyFs=
+
+Name: res/themes.7.zip
+SHA1-Digest: C19YzTVzlhiaNwCCQRCMx+WXT9s=
+
+Name: res/languages/VIE.dat
+SHA1-Digest: MB6xM1zB6z74ADE9Z8BG9AN0e6g=
+
+Name: res/languages/POR.dat
+SHA1-Digest: LODDfpfv6jpAXx+UPo2PusKlnJY=
+
+Name: res/languages/HIN.dat
+SHA1-Digest: 5e/5ViS+DyZZRUK+r7o6fYagO5o=
+
+Name: res/languages/PAN.dat
+SHA1-Digest: 7dccZS8yl7srWEzJw1V1NKcRKBI=
+
+Name: res/languages/RUS.dat
+SHA1-Digest: dbPdGefGzVpCF3vK+DgfbbQBuDA=
+
+Name: res/languages/SPA.dat
+SHA1-Digest: VEwg5zjrh+WaoE56jzrdQkfIsq0=
+
+Name: res/languages/CusStrResId_def.h
+SHA1-Digest: OUnR0OCjVFB1Ax2GDtMaqfqJhSU=
+
+Name: res/languages/FRE.dat
+SHA1-Digest: 9wIF4nYX1zGWYohNOwBf/JWZ2dM=
+
+Name: res/languages/UKR.dat
+SHA1-Digest: o72yJTCLIAlQMRcatoEmiEiGnCA=
+
+Name: res/languages/ENG.dat
+SHA1-Digest: 9cKhVttBq82XfsAzYe9kd9GjtdA=
+
+Name: res/languages/MAL.dat
+SHA1-Digest: TX5zvTz28x8/VRmTa+FRsBL4naA=
+
+Name: res/languages/THA.dat
+SHA1-Digest: F5Fz55l9J0xXsS5i9EGA7auIrn0=
+
+Name: res/languages/JAP.dat
+SHA1-Digest: GdbfD5888WQB+Fp0mLs6RDhkVII=
+
+Name: res/languages/ARA.dat
+SHA1-Digest: TbLatTlBWsfxSQ1oMSM2WuyNBYA=
+
+Name: res/languages/IND.dat
+SHA1-Digest: a+sk4XiAgDxIX89ZgObJXFhlC3A=
+
+Name: res/languages/MAY.dat
+SHA1-Digest: 0q+3jyDo76+80TqJJVoBKMCi1kc=
+
+Name: res/languages/CHS.dat
+SHA1-Digest: GwweWl4A/Y70VAXkefhlLO2GnHk=
+
+Name: res/languages/TAM.dat
+SHA1-Digest: vw8/HzHXzPMWxdKLTHk2iDTSpcM=
+
+Name: res/themes/gentle.dat
+SHA1-Digest: /Gb2Ewi635oyoiDVaORwwy2vz2c=
+
+Name: res/themes/default.dat
+SHA1-Digest: xkAPU7otSa0A1qtOvtlYbxiIufA=
+
+Name: res/themes/CusImgResId_def.h
+SHA1-Digest: 3Zh/Y8oncpDwY+Q72ZBfZLJJbJI=
+
+Name: res/themes/icon.png
+SHA1-Digest: CPqRZX/A2C74on36VbSK69cP/yk=
+
+Name: res/themes/icon_01.png
+SHA1-Digest: 2RH6cBBHGbhIycphSdJI68DAhP4=
+
+Name: res/themes/widget1.png
+SHA1-Digest: dVxt6DtLBQL56rCSYHAJsrOQoMk=
+
+Name: res/themes/romantic_sunset.dat
+SHA1-Digest: I0R8yAAI+ev04yCDrING6lqFzgU=
+

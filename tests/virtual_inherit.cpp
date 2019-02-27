@@ -20,6 +20,11 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+
 
 using namespace std;
 
@@ -54,8 +59,87 @@ struct A {
     int b;
 };
 
+
+char* globalChar = NULL;
+
+void func10(const char* p) {
+    globalChar = (char*)p;    
+}
+
+void func9() {
+    char* pSrc = "Hello World!";
+    std::string str(pSrc);
+
+    //func10(pSrc);
+    func10(str.c_str());
+}
+
 int main(int argc, char* argv[])
 {
+    {
+        char buff[1024];
+        snprintf(buff, 1023, "abc%sdef%sghi", "123");
+        printf("buff=%s\n", buff);
+        snprintf(buff, 1023, buff, "123");
+        printf("buff=%s\n", buff);
+    }
+    return 0;
+    {
+        struct stat st;
+        stat("dir1", &st);
+        printf("uid:%d\n", st.st_uid);
+        printf("gid:%d\n", st.st_gid);
+
+        printf("st_mode:%d\n", st.st_mode);
+        printf("st_mode:%o\n", st.st_mode);
+        printf("st_mode:%x\n", st.st_mode);
+
+        printf("rwx:%o\n", (st.st_mode & 0777));
+
+        if ((st.st_mode & 0777) == 0751) {
+            printf("0751\n");
+        }
+
+        printf("test:%d\n", 017);
+        return 0;
+    }
+
+
+    {
+        std::string strBuff = "123#abc#DE";
+        size_t SharpPos = std::string::npos; 
+        while (true) {
+            SharpPos = strBuff.find("#");
+            // found #
+            if (SharpPos != std::string::npos) {
+                size_t msgPos = 0; 
+                std::string subStr = strBuff.substr(0, SharpPos);
+
+                printf("substr:%s\n", subStr.c_str());
+                if (SharpPos + 1 >= strBuff.length()) {
+                    break;
+                }
+
+                std::string tmp = strBuff.substr(SharpPos + 1);
+                strBuff = tmp;
+                printf("strBuff :%s\n", strBuff.c_str());
+            }
+            else {
+                printf("not found # sectionString:%s\n", strBuff.c_str());
+                break;
+            }
+        }
+    }
+
+return 0;
+    func9();
+    std::string str111("sfads");
+    std::string str112("sfads");
+    std::string str113("sfads");
+    printf("globalChar =%s\n", globalChar);
+
+return 0;
+
     int c = 100;
     A * p = (A*)(((char*)&c) - offsetof(A, b));
     printf("p->b=[%d]\n", p->b);
