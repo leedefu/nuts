@@ -7,9 +7,9 @@ CPPFLAGS = -std=c++0x -c -Wall -g
 LIB = -lpthread
 INCLUDE =
 
-all:test
+all:threadcancel
 
-test: test.o
+threadcancel: main.o
 	$(CPP) $(INCLUDE) $^ -o $@ $(LIB) 
 
 .c.o:
@@ -19,4 +19,4 @@ test: test.o
 	$(CPP) $(CPPFLAGS) $(INCLUDE) -c $<
 
 clean:
-	rm -rf *.o test
+	rm -rf *.o threadcancel

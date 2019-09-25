@@ -6,19 +6,22 @@ int main(int argc, char* argv[])
 {
     {
         int a = 0x87654321;
-        char *p = (char *)&a;
+        unsigned char* p = (unsigned char*)&a;
         {
             char str[20] = { 0 };
-            sprintf(str,"%d.%d.%d.%d\n", p[0], p[1], p[2], p[3]);
+            sprintf(str,"%d.%d.%d.%d", p[0], p[1], p[2], p[3]);
             printf(str);
+            printf("\n");
         }
 
         {
             char str[20] = { 0 };
-            sprintf(str,"0x%x.0x%x.0x%x.0x%x\n", p[0], p[1], p[2], p[3]);
+            sprintf(str,"0x%x.0x%x.0x%x.0x%x", p[0], p[1], p[2], p[3]);
             printf(str);
+            printf("\n");
         }
     }
+
     // method 1
     /* using union to check endian */
     /***********************************************************/

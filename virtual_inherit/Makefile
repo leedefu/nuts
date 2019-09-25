@@ -7,9 +7,9 @@ CPPFLAGS = -std=c++0x -c -Wall -g
 LIB =
 INCLUDE =
 
-all:test
+all:virtual_inherit
 
-test: virtual_inherit.o
+virtual_inherit: main.o
 	$(CPP) $(LIB) $(INCLUDE) $^ -o $@
 
 .c.o:
@@ -19,4 +19,4 @@ test: virtual_inherit.o
 	$(CPP) $(CPPFLAGS) $(INCLUDE) -c $<
 
 clean:
-	rm -rf *.o test
+	rm -rf *.o virtual_inherit
