@@ -1,3 +1,7 @@
+valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all
+
+
+
 * core thread (core/thread)   
 
 * daytime protocol sample code (samples/daytime)   
