@@ -19,6 +19,7 @@ SRCS = main.cpp \
     tst_move_iterator.cpp \
     tst_inherit_type.cpp \
     tst_vector_emplace.cpp \
+    tst_lrvalue.cpp \
 
 
 OBJS = $(SRCS:.cpp=.o)
