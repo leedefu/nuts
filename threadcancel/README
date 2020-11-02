@@ -8,4 +8,7 @@ main(): sending cancellation request
 thread_func(): about to enable cancellation
 main(): thread was canceled
 
+注意：pthread_cancel只是找一个cancel point来退出线程，退出的行为不可预测，比如线程函数内的局部变量可能不会走析构函数，比如锁不会被解锁，这些行为在各个平台上不一致，比如linux下会走析构，QNX下不会走析构函数。
+鉴于上述，可能出现锁不被解锁，其他线程永远拿不到锁的情况。
+
 
