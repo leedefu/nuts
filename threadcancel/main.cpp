@@ -4,12 +4,52 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+class TestRelease {
+public:
+TestRelease()
+{
+    printf("TestRelease construct\n");
+}
+
+~TestRelease()
+{
+    printf("TestRelease de-construct\n");
+}
+
+};
+
+class AutoRelease {
+public:
+AutoRelease()
+{
+    printf("AutoRelease construct\n");
+}
+
+~AutoRelease()
+{
+    printf("AutoRelease de-construct\n");
+}
+
+};
+
 #define handle_error_en(en, msg) \
     do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 
 static void *
+thread_func_impl(void *ignored_argument);
+
+static void *
 thread_func(void *ignored_argument)
 {
+    thread_func_impl(ignored_argument);
+}
+
+static void *
+thread_func_impl(void *ignored_argument)
+{
+    AutoRelease autoobj;
+    TestRelease test;
     int s;
 
     /* Disable cancellation for a while, so that we don't
@@ -29,6 +69,7 @@ thread_func(void *ignored_argument)
 
     /* sleep() is a cancellation point */
 
+#if 0
     while (1) {
         printf("sleep...\n");
         printf("sleep1...\n");
@@ -40,6 +81,11 @@ thread_func(void *ignored_argument)
         printf("sleep7...\n");
         sleep(1);
         printf("sleep8...\n");
+    }
+#endif
+
+    while(1) {
+        printf("sleep------------\n");
     }
 
     sleep(1000);        /* Should get canceled while we sleep */
