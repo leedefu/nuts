@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
     printf("Test cpp2.0 new feature\n");
 
     tst_lrvalue();
+    printf("__cplusplus:[%d]\n", __cplusplus);
 
     // tst_unique_ptr();
 

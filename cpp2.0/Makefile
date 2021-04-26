@@ -1,7 +1,9 @@
 CC = g++
 
-CFLAGS = -c -g -std=c++11 -std=gnu++11
-LDFLAGS =-lpthread -std=c++11 -std=gnu++11
+#CFLAGS = -c -g -std=gnu++17
+#LDFLAGS =-lpthread -std=gnu++17
+CFLAGS = -c -g
+LDFLAGS =-lpthread
 
 #CFLAGS = -c -Wall -g -fPIC
 #LDFLAGS =-lpthread -shared
