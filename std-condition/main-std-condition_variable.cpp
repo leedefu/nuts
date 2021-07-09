@@ -76,10 +76,39 @@ void thread_2_func()
     l_printf("thread_2_func end\n");
 }
 
+void thread_3_func()
+{
+    l_printf("thread_3_func\n");
+
+    while(!bQuit) {
+        std::unique_lock<std::mutex> lock(g_mutex);
+
+        l_printf("condition wait\n");
+        // when wait, automatic unlock
+        g_condition_variable.wait_for(lock, std::chrono::seconds(10), []{return (g_vector.size() != 0);});
+        // g_condition_variable.wait(lock, []{return (g_vector.size() != 0);});
+        l_printf("condition wait end\n");
+    }
+
+    l_printf("thread_1_func end\n");
+}
 /////////////////////////////////////////////
 int main(int argc, char* argv[])
 {
     l_printf("Test for condition_variable\n");
+
+
+    std::thread thread4(thread_3_func);
+
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+            g_vector.resize(1);
+        l_printf("condition notify_one\n");
+        g_condition_variable.notify_one();
+        l_printf("condition notify_one end\n");
+
+    thread4.join();
+    return 0;
+
 
     std::thread thread2(thread_2_func);
     std::thread thread3(thread_2_func);
